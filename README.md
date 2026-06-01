@@ -9,8 +9,7 @@ Autor: Vlad Straistraru-Zlate · FEAA Iași · Informatică Economică · 2025�
 
 ## Demo live
 
-> Înlocuiește cu link-ul tău după deploy:  
-> `https://<username>.github.io/insuriflight/`
+> `https://zlv2004.github.io/InsuriFlight/`
 
 ---
 
