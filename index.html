@@ -1214,11 +1214,11 @@
     }
 
     function RecommendFlight() {
-      const [f, setF] = useState({ route: "", date: "", reason: "" });
+      const [f, setF] = useState({ route: "", flightCode: "", date: "", time: "", airline: "", reason: "" });
       const upd = k => e => setF(v => Object.assign({}, v, { [k]: e.target.value }));
       const send = () => {
         const s = encodeURIComponent("InsuriFlight - Recomandare zbor");
-        const b = encodeURIComponent("Ruta: " + f.route + "\nData: " + f.date + "\n\nDetalii:\n" + f.reason);
+        const b = encodeURIComponent("Ruta: " + f.route + "\nCod zbor: " + f.flightCode + "\nData: " + f.date + "\nOra preferata: " + f.time + "\nCompanie aeriana: " + f.airline + "\n\nDetalii:\n" + f.reason);
         window.location.href = "mailto:" + OWNER_EMAIL + "?subject=" + s + "&body=" + b;
       };
       return html`
@@ -1226,8 +1226,11 @@
       <div class="f-t">Recomanda un zbor</div>
       <div class="f-s">Nu gasesti ruta ta? Sugereaza-ne zborul dorit.</div>
       <div class="fld"><label>Ruta (ex: OTP - CDG)</label><input type="text" placeholder="OTP - CDG" value=${f.route} onInput=${upd("route")}/></div>
+      <div class="fld"><label>Cod zbor</label><input type="text" placeholder="ex: RO 372, W6 1234 (scris pe biletul tau)" value=${f.flightCode} onInput=${upd("flightCode")} required/></div>
       <div class="fld"><label>Data dorita</label><input type="date" value=${f.date} onInput=${upd("date")}/></div>
-      <div class="fld"><label>Detalii</label><textarea placeholder="Cod zbor, companie aeriana, etc." value=${f.reason} onInput=${upd("reason")}/></div>
+      <div class="fld"><label>Ora preferata</label><select value=${f.time} onChange=${upd("time")}><option value="">--</option><option value="Dimineata (06:00-10:00)">Dimineata (06:00-10:00)</option><option value="Pranz (10:00-14:00)">Pranz (10:00-14:00)</option><option value="Dupa-amiaza (14:00-18:00)">Dupa-amiaza (14:00-18:00)</option><option value="Seara (18:00-23:00)">Seara (18:00-23:00)</option><option value="Orice ora">Orice ora</option></select></div>
+      <div class="fld"><label>Companie aeriana (optional)</label><input type="text" placeholder="ex: TAROM, Wizz Air, Turkish Airlines" value=${f.airline} onInput=${upd("airline")}/></div>
+      <div class="fld"><label>Detalii</label><textarea placeholder="Alte informatii relevante" value=${f.reason} onInput=${upd("reason")}/></div>
       <button class="btn btn-p btn-w" onClick=${send} disabled=${!OWNER_EMAIL}>
         ${OWNER_EMAIL ? "Trimite recomandarea" : "OWNER_EMAIL neconfigurat"}
       </button>
