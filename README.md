@@ -46,58 +46,6 @@ InsuriFlight permite utilizatorilor să cumpere polițe de asigurare parametric�
 
 ---
 
-## Configurare înainte de deploy
-
-Deschide `index.html` și editează două constante în blocul `CONFIG`:
-
-```js
-// 1. Emailul tău — pentru formularele de contact
-const OWNER_EMAIL = "email@example.com";
-
-// 2. Zborurile înregistrate pe contract — codurile TREBUIE să coincidă
-//    exact cu cele din registerFlight() de pe contractul tău
-const FLIGHTS_META = [
-  { code:"RO372",  origin:"OTP", originCity:"București",   dest:"LHR", destCity:"Londra"    },
-  { code:"W61234", origin:"CLJ", originCity:"Cluj-Napoca", dest:"BCN", destCity:"Barcelona" },
-  { code:"TK1413", origin:"OTP", originCity:"București",   dest:"IST", destCity:"Istanbul"  },
-  { code:"FR8821", origin:"TSR", originCity:"Timișoara",   dest:"CDG", destCity:"Paris"     },
-];
-```
-
----
-
-## Deploy pe GitHub Pages
-
-### Pasul 1 — Creează repository
-
-```bash
-git init
-git add index.html README.md
-git commit -m "feat: InsuriFlight UI v1"
-git branch -M main
-git remote add origin https://github.com/<username>/insuriflight.git
-git push -u origin main
-```
-
-### Pasul 2 — Activează GitHub Pages
-
-1. Intră pe repository → **Settings** → **Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` / `/ (root)`
-4. Salvează
-
-Aplicația va fi disponibilă la `https://<username>.github.io/insuriflight/` în ~2 minute.
-
-### Actualizare ulterioară
-
-```bash
-git add index.html
-git commit -m "update: <descriere modificare>"
-git push
-```
-
----
-
 ## Utilizare
 
 ### Cerințe
