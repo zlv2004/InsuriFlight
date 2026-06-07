@@ -9,7 +9,7 @@ Autor: Vlad Straistraru-Zlate · FEAA Iași · Informatică Economică · 2025�
 
 ## Demo live
 
-> `https://zlv2004.github.io/InsuriFlight/`
+> https://zlv2004.github.io/InsuriFlight/(https://zlv2004.github.io/InsuriFlight/)
 
 ---
 
