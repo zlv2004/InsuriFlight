@@ -1057,7 +1057,7 @@
     const fmtDate = ts => ts ? new Date(Number(ts) * 1000).toLocaleDateString("ro-RO", { day: "2-digit", month: "short", year: "numeric" }) : "-";
 
     function policyBadge(state, claimOpen) {
-      if (state === PS.PAID) return { label: "Platit", cls: "b-pd" };
+      if (state === PS.PAID) return { label: "Plătit", cls: "b-pd" };
       if (state === PS.EXPIRED) return { label: "Expirat", cls: "b-ex" };
       if (state === PS.CLAIMABLE || claimOpen) return { label: "Claim disponibil", cls: "b-eli" };
       return { label: "Activ", cls: "b-act" };
@@ -1065,10 +1065,10 @@
     function routeChip(r) {
       if (!r || !r.isRegistered) return { label: "-", cls: "fcs-x" };
       if (r.resultReported) return { label: "Raportat ok", cls: "fcs-r" };
-      return { label: "Inregistrat", cls: "fcs-a" };
+      return { label: "Înregistrat", cls: "fcs-a" };
     }
     function errMsg(e) {
-      return e && (e.reason || e.shortMessage || (e.data && e.data.message) || (e.message && e.message.split("(")[0].trim())) || "Eroare necunoscuta";
+      return e && (e.reason || e.shortMessage || (e.data && e.data.message) || (e.message && e.message.split("(")[0].trim())) || "Eroare necunoscută";
     }
 
     const IcoPlane = ({ s }) => html`<svg width=${s || 18} height=${s || 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.5L12 21 2 16.5M17 6.5l-5 2.5-5-2.5M12 3l10 5-10 5L2 8l10-5z"/><path d="M12 13v8"/></svg>`;
@@ -1105,7 +1105,7 @@
           <div class="pi"><div class="pl">Payout</div><div class="pv pg">${route ? fmtEth(route.payoutWei) : html`<span class="pl-ld">...</span>`}</div></div>
         </div>
         <button class="btn btn-a btn-sm" disabled=${!canBuy} onClick=${() => canBuy && onBuy(meta.code)}>
-          ${!route ? "..." : (route.resultReported ? "Expirat" : "Cumpara")}
+          ${!route ? "..." : (route.resultReported ? "Expirat" : "Cumpără")}
         </button>
       </div>
     </div>
@@ -1119,18 +1119,18 @@
     <div class="mdrop" onClick=${e => { if (e.target === e.currentTarget && !pending) onClose(); }}>
       <div class="md">
         <button class="md-x" onClick=${onClose} disabled=${pending}>x</button>
-        <div class="md-t">Confirma polita</div>
-        <div class="md-s">Verifica detaliile inainte de a semna in MetaMask</div>
+        <div class="md-t">Confirmă polița</div>
+        <div class="md-s">Verifică detaliile înainte de a semna în MetaMask</div>
         <div class="md-pill">
           <span>${code} - ${meta.origin || "?"} - ${meta.dest || "?"}</span>
           <span class="md-pill-dt">${route ? fmtDate(route.scheduledDate) : ""}</span>
         </div>
         ${route && html`
           <div class="md-det">
-            <div class="md-row"><span class="md-rl">Prima de platit</span><span class="md-rv">${fmtEth(route.premiumWei)}</span></div>
-            <div class="md-row"><span class="md-rl">Payout la intarziere 3h+</span><span class="md-rv md-rv-g">${fmtEth(route.payoutWei)}</span></div>
+            <div class="md-row"><span class="md-rl">Primă de plătit</span><span class="md-rv">${fmtEth(route.premiumWei)}</span></div>
+            <div class="md-row"><span class="md-rl">Payout la întârziere 3h+</span><span class="md-rv md-rv-g">${fmtEth(route.payoutWei)}</span></div>
             <div class="md-div"></div>
-            <div class="md-row"><span class="md-rl">Retea</span><span class="md-rv">Sepolia Testnet</span></div>
+            <div class="md-row"><span class="md-rl">Rețea</span><span class="md-rv">Sepolia Testnet</span></div>
             <div class="md-row"><span class="md-rl">Contract</span><span class="md-rv-s">${fmtAddr(CONTRACT_ADDRESS)}</span></div>
           </div>
         `}
@@ -1139,7 +1139,7 @@
             <span class="al-ico"><${IcoShield}/></span>
             <div>
               <div class="al-t">Adresa ta nu este pe whitelist</div>
-              <div class="al-s">Nu poti cumpara fara aprobare. <button class="al-lk" onClick=${onReqAccess}>Solicita acces</button></div>
+              <div class="al-s">Nu poti cumpăra fără aprobare. <button class="al-lk" onClick=${onReqAccess}>Solicita acces</button></div>
             </div>
           </div>
         `}
@@ -1150,7 +1150,7 @@
           </div>
         `}
         <button class="btn btn-a btn-w" disabled=${!isWhitelisted || !route || pending} onClick=${onConfirm}>
-          ${pending ? html`<${Spin}/> Se proceseaza...` : ("Confirma si plateste " + (route ? fmtEth(route.premiumWei) : ""))}
+          ${pending ? html`<${Spin}/> Se proceseaza...` : ("Confirmă și plătește " + (route ? fmtEth(route.premiumWei) : ""))}
         </button>
       </div>
     </div>
@@ -1175,7 +1175,7 @@
         <span class=${"badge " + badge.cls}>${badge.label}</span>
       </div>
       <div class="pam">
-        <div class="am"><div class="al">Prima platita</div><div class="av">${fmtEth(policy.premiumPaid)}</div></div>
+        <div class="am"><div class="al">Prima plătită</div><div class="av">${fmtEth(policy.premiumPaid)}</div></div>
         <div class="am"><div class="al">Payout eligibil</div><div class="av ag">${fmtEth(policy.payoutAmount)}</div></div>
         <div class="am"><div class="al">Data zborului</div><div class="av">${fmtDate(policy.flightDate)}</div></div>
       </div>
@@ -1185,7 +1185,7 @@
             ${(txState && txState.action === "claim" && txing) ? html`<${Spin}/> Se proceseaza...` : "Revendica despagubire"}
           </button>
           <button class="btn btn-g btn-sm" disabled=${txing} onClick=${() => onRefund(policy.id)}>
-            ${(txState && txState.action === "refund" && txing) ? html`<${Spin}/>` : "Solicita refund"}
+            ${(txState && txState.action === "refund" && txing) ? html`<${Spin}/>` : "Solicită refund"}
           </button>
         </div>
       `}
@@ -1385,7 +1385,7 @@
         } catch (e) { setPolTx({ id: pid, action: "refund", type: "err", msg: "Eroare: " + errMsg(e) }); }
       };
 
-      const TABS = [["flights", "Zboruri"], ["policies", "Politele mele"], ["access", "Request acces"], ["recommend", "Recomanda zbor"]];
+      const TABS = [["flights", "Zboruri"], ["policies", "Polițele mele"], ["access", "Request acces"], ["recommend", "Recomandă zbor"]];
 
       return html`
     <div class="wrap">
@@ -1420,20 +1420,20 @@
         ${tab === "flights" && html`
           <div class="hero">
             <div>
-              <div class="hero-ey">Asigurare parametrica on-chain</div>
-              <div class="hero-t">Protectie automata la zborul tau</div>
-              <div class="hero-s">Plata despagubirii se face automat prin smart contract pe Ethereum Sepolia. Intarziere 3h+ = payout garantat.</div>
+              <div class="hero-ey">Asigurare parametrică on-chain</div>
+              <div class="hero-t">Protecție automată la zborul tău</div>
+              <div class="hero-s">Plata despăgubirii se face automat prin smart contract pe Ethereum Sepolia. Intârziere 3h+ = payout garantat.</div>
             </div>
             <div class="stats">
               <div class="stat"><div class="stat-v">${FLIGHTS_META.length}</div><div class="stat-l">Zboruri</div></div>
-              <div class="stat"><div class="stat-v">3h+</div><div class="stat-l">Prag intarziere</div></div>
+              <div class="stat"><div class="stat-v">3h+</div><div class="stat-l">Prag întârziere</div></div>
               <div class="stat"><div class="stat-v">~5x</div><div class="stat-l">Multiplicator</div></div>
             </div>
           </div>
           <div class="shd">
             <div>
               <div class="st">Zboruri disponibile</div>
-              <div class="ss">${(account && onSepolia) ? "Date live de pe blockchain" : "Conecteaza wallet-ul pentru date live si tranzactii"}</div>
+              <div class="ss">${(account && onSepolia) ? "Date live de pe blockchain" : "Conectează wallet-ul pentru date live și tranzacții"}</div>
             </div>
           </div>
           <div class="fg">
@@ -1441,9 +1441,9 @@
           </div>
           ${!account && html`
             <div class="empty">
-              <div class="empty-t">Conecteaza wallet-ul pentru a cumpara</div>
-              <div class="empty-s">Ai nevoie de MetaMask si de o adresa aprobata (whitelist).</div>
-              <button class="btn btn-p mt16" onClick=${connect}>Conecteaza MetaMask</button>
+              <div class="empty-t">Conecteaza wallet-ul pentru a cumpăra</div>
+              <div class="empty-s">Ai nevoie de MetaMask și de o adresă aprobată (whitelist).</div>
+              <button class="btn btn-p mt16" onClick=${connect}>Conectează MetaMask</button>
             </div>
           `}
         `}
@@ -1452,20 +1452,20 @@
           <div class="pt28">
             <div class="shd">
               <div>
-                <div class="st">Politele mele</div>
-                <div class="ss">${account ? ("Wallet: " + fmtAddr(account)) : "Conecteaza wallet-ul"}</div>
+                <div class="st">Polițele mele</div>
+                <div class="ss">${account ? ("Wallet: " + fmtAddr(account)) : "Conectează wallet-ul"}</div>
               </div>
               ${(account && onSepolia) && html`
                 <button class="btn btn-g btn-sm" onClick=${() => loadPolicies(web3.contract, account)}>
-                  ${loadingP ? html`<${Spin}/>` : "Actualizeaza"}
+                  ${loadingP ? html`<${Spin}/>` : "Actualizează"}
                 </button>
               `}
             </div>
-            ${!account && html`<div class="empty"><div class="empty-t">Conecteaza wallet-ul</div><button class="btn btn-p mt16" onClick=${connect}>Conecteaza MetaMask</button></div>`}
+            ${!account && html`<div class="empty"><div class="empty-t">Conectează wallet-ul</div><button class="btn btn-p mt16" onClick=${connect}>Conectează MetaMask</button></div>`}
             ${(account && loadingP) && html`<div class="empty"><${Spin} lg=${true}/></div>`}
             ${(account && !loadingP && policies.length === 0) && html`
               <div class="empty">
-                <div class="empty-t">Nicio polita gasita</div>
+                <div class="empty-t">Nicio poliță găsita</div>
                 <div class="empty-s">Nu ai cumparat nicio polita cu acest wallet.</div>
                 <button class="bl fs13 mt16" onClick=${() => setTab("flights")}>Mergi la Zboruri</button>
               </div>
